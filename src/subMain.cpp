@@ -1,12 +1,31 @@
-#include <iostream>
-#include <string>
+#include "../pch.h"
+
 void subMain(){
     while(true)
     {
         std::cout<<"$ ";
 
-        std::string command;
-        std::cin>> command;
-        std::cout<<command<<": command not found"<<std::endl;
+        std::string line;
+        std::getline(std::cin, line);
+        spaceRemove(line);
+        if(line == "exit"){
+            break;
+        }else if(line.substr(0, 4) == "echo"){
+            std:: string text = line.substr(5);
+            spaceRemove(text);
+            std::cout<<text<<std::endl;
+        }else if(line.substr(0, 4)== "type"){
+            std:: string text = line.substr(5);
+            spaceRemove(text);
+            auto it = builtins.find(text);
+            if( it != builtins.end() ){
+                std::cout<<text<<" is a shell builtin"<<std::endl;
+            }else{
+                std::cout<<text<<": not found"<<std::endl;
+            }
+        }
+        else{
+            std::cout<<line<<": command not found"<<std::endl;
+        }
     }
 }

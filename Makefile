@@ -1,6 +1,6 @@
 # Compiler
 CXX = g++
-CXXFLAGS = -IUtilities -std=c++17 -Wall
+CXXFLAGS = -std=c++17 -Wall -IUtilities
 
 # Source files
 SRCS = $(wildcard src/*.cpp)
@@ -10,16 +10,20 @@ OBJS = $(SRCS:.cpp=.o)
 TARGET = main
 
 # Default rule
-all: $(TARGET)
+all: src/pch.h.gch $(TARGET)
 
-# Link
+# Link executable
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Compile cpp -> object files
+# Compile .cpp -> .o using precompiled header
 src/%.o: src/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -include ../pch.h -c $< -o $@
+
+# Precompiled header
+src/pch.h.gch: pch.h
+	$(CXX) $(CXXFLAGS) -x c++-header pch.h -o src/pch.h.gch
 
 # Clean build files
 clean:
-	rm -f src/*.o $(TARGET)
+	rm -f src/*.o $(TARGET) src/pch.h.gch
