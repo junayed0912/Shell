@@ -1,0 +1,14 @@
+# Compiled binaries
+main
+*.o
+
+# Backup files
+*~
+
+# OS-specific files
+.DS_Store
+
+# Editor-specific files
+*.swp
+*.sublime-workspace
+*.vscode/
