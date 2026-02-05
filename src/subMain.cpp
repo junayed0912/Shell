@@ -33,6 +33,9 @@ void subMain()
                 std::cout<<typeChecker(text)<<std::endl;
             }
         }
+        else if(line.substr(0, 3) == "pwd"){
+            std::cout<<currentDir()<<std::endl;
+        }
         else
         {
             fileExecution(line);
