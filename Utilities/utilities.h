@@ -14,6 +14,7 @@ std::string typeChecker(std::string command); //it will check if something is sh
 void fileExecution(std::string command); // it will execute a file;
 void spaceRemove(std::string &str); // it will remove unnecessary spaces.
 void subMain(); 
+void Echo(std::string &line);
 extern std::map<std::string, std::string> builtins;
 
 #endif

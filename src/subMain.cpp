@@ -17,7 +17,7 @@ void subMain()
         {
             std::string text = line.substr(5);
             spaceRemove(text);
-            std::cout << text << std::endl;
+            Echo(text);
         }
         else if (line.substr(0, 4) == "type")
         {

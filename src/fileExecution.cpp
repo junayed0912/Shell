@@ -2,12 +2,34 @@
 void fileExecution(std::string line)
 {
     std::vector<std::string> tokens;
-    std::stringstream ss(line);
     std::string word;
-    while (ss >> word)
+    bool isSingleQuote = false;
+    for (char c : line)
+    {
+        if (c == '\'')
+        {
+            isSingleQuote = !isSingleQuote;
+            continue;
+        }
+        if (!isSingleQuote && isspace(c))
+        {
+            if (!word.empty())
+            {
+                tokens.push_back(word);
+                word.clear();
+            }
+        }
+        else
+        {
+            word += c;
+        }
+    }
+    if (!word.empty())
     {
         tokens.push_back(word);
+        word.clear();
     }
+
     if (tokens.empty())
         return;
     std::vector<char *> argv;
@@ -19,7 +41,7 @@ void fileExecution(std::string line)
     }
     for (auto &token : tokens)
     {
-        argv.push_back(token.data());
+        argv.push_back(const_cast<char *>(token.c_str()));
     }
     argv.push_back(nullptr);
     pid_t pid = fork();
@@ -32,7 +54,8 @@ void fileExecution(std::string line)
     else if (pid > 0)
     {
         int status;
-        if(waitpid(pid, &status, 0) == -1){
+        if (waitpid(pid, &status, 0) == -1)
+        {
             perror("waitpid failed");
         };
     }
