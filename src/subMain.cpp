@@ -36,6 +36,12 @@ void subMain()
         else if(line.substr(0, 3) == "pwd"){
             std::cout<<currentDir()<<std::endl;
         }
+        else if(line.substr(0, 2) == "cd")
+        {
+            std::string text = line.substr(3);
+            spaceRemove(text);
+            changeDirectory(text);
+        }
         else
         {
             fileExecution(line);
