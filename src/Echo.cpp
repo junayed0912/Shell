@@ -4,21 +4,33 @@ void Echo(std::string &line)
     std::vector<std::string> tokens;
     std::string token;
     bool isSingleQuote = false;
+    bool isDoubleQuote = false;
     for (size_t i = 0; i < line.size(); i++)
     {
         char c = line[i];
-        if (c == '\'')
+            if (c == '\'')
         {
+          if (!isDoubleQuote)
+          {
             isSingleQuote = !isSingleQuote;
             continue;
+          }
         }
-        if (isspace(c) && !isSingleQuote)
+        if (c == '"')
         {
-            if (!token.empty())
-            {
-                tokens.push_back(token);
-                token.clear();
-            }
+          if (!isSingleQuote)
+          {
+            isDoubleQuote = !isDoubleQuote;
+            continue;
+          }
+        }
+        if (!isSingleQuote && !isDoubleQuote && isspace(c))
+        {
+          if (!token.empty())
+          {
+            tokens.push_back(token);
+            token.clear();
+          }
         }
         else
         {

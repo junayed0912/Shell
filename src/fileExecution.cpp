@@ -4,20 +4,32 @@ void fileExecution(std::string line)
     std::vector<std::string> tokens;
     std::string word;
     bool isSingleQuote = false;
+    bool isDoubleQuote = false;
     for (char c : line)
     {
-        if (c == '\'')
+            if (c == '\'')
         {
+          if (!isDoubleQuote)
+          {
             isSingleQuote = !isSingleQuote;
             continue;
+          }
         }
-        if (!isSingleQuote && isspace(c))
+        if (c == '"')
         {
-            if (!word.empty())
-            {
-                tokens.push_back(word);
-                word.clear();
-            }
+          if (!isSingleQuote)
+          {
+            isDoubleQuote = !isDoubleQuote;
+            continue;
+          }
+        }
+        if (!isSingleQuote && !isDoubleQuote && isspace(c))
+        {
+          if (!word.empty())
+          {
+            tokens.push_back(word);
+            word.clear();
+          }
         }
         else
         {
@@ -57,7 +69,7 @@ void fileExecution(std::string line)
         if (waitpid(pid, &status, 0) == -1)
         {
             perror("waitpid failed");
-        };
+        }
     }
     else
     {
