@@ -35,7 +35,7 @@ void subMain()
         }
         else
         {
-            std::cout << line << ": command not found" << std::endl;
+            fileExecution(line);
         }
     }
 }

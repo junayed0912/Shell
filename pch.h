@@ -8,6 +8,9 @@
 #include <algorithm>
 #include <utility>
 #include <filesystem>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
 #include "utilities.h"
 
 #endif
