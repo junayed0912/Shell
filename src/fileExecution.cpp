@@ -1,49 +1,7 @@
 #include "../pch.h"
 void fileExecution(std::string line)
 {
-    std::vector<std::string> tokens;
-    std::string word;
-    bool isSingleQuote = false;
-    bool isDoubleQuote = false;
-    for (char c : line)
-    {
-            if (c == '\'')
-        {
-          if (!isDoubleQuote)
-          {
-            isSingleQuote = !isSingleQuote;
-            continue;
-          }
-        }
-        if (c == '"')
-        {
-          if (!isSingleQuote)
-          {
-            isDoubleQuote = !isDoubleQuote;
-            continue;
-          }
-        }
-        if (!isSingleQuote && !isDoubleQuote && isspace(c))
-        {
-          if (!word.empty())
-          {
-            tokens.push_back(word);
-            word.clear();
-          }
-        }
-        else
-        {
-            word += c;
-        }
-    }
-    if (!word.empty())
-    {
-        tokens.push_back(word);
-        word.clear();
-    }
-
-    if (tokens.empty())
-        return;
+    auto tokens  = handleLine(line);
     std::vector<char *> argv;
     auto path = pathChecker(tokens[0]);
     if (path.second == ": not found")

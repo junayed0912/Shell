@@ -16,5 +16,6 @@ void spaceRemove(std::string &str); // it will remove unnecessary spaces.
 void subMain(); 
 void Echo(std::string &line);
 extern std::map<std::string, std::string> builtins;
+std::vector<std::string> handleLine(std::string line);
 
 #endif
