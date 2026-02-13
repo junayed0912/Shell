@@ -11,7 +11,7 @@ std::string currentDir(); //it will print the current directory
 void changeDirectory(std::string path); // it will change the current directory
 std::pair<std::string, std::string> pathChecker(std::string command); // it will check the path whether it's valid or not
 std::string typeChecker(std::string command); //it will check if something is shell builtin or not
-void fileExecution(std::string command); // it will execute a file;
+void fileExecution(std::string command); // it will execute an application or any executable file;
 void spaceRemove(std::string &str); // it will remove unnecessary spaces.
 void subMain(); 
 void Echo(std::string &line);
