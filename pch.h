@@ -12,5 +12,6 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "utilities.h"
+#include <fcntl.h>
 
 #endif

@@ -17,5 +17,7 @@ void subMain();
 void Echo(std::string &line);
 extern std::map<std::string, std::string> builtins;
 std::vector<std::string> handleLine(std::string line);
+std::pair<int, std::string> find_redirection(const std::vector<std::string> &tokens);
+void reDirection(std::vector<std::string> &tokens, int redirection_ind, std::string redirection_symbol);
 
 #endif
